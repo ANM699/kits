@@ -1,15 +1,50 @@
-import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
+import React, { useState } from "react";
+import { Layout, Menu } from "antd";
+import { Switch, Route, HashRouter, Link } from "react-router-dom";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
-} from '@ant-design/icons';
-import './Main.less';
+  LayoutOutlined,
+} from "@ant-design/icons";
+import "./Main.less";
+
+import Rgl from "./RGL/rgl";
 
 const { Header, Sider, Content } = Layout;
+
+const navList = [
+  {
+    path: "/",
+    component: Rgl,
+    exact: true,
+  },
+];
+
+const menuList = [
+  {
+    path: "/",
+    title: "React Grid Layout",
+    icon: <LayoutOutlined />,
+  },
+  {
+    path: "/1",
+    title: "1",
+    icon: <UserOutlined />,
+  },
+  {
+    path: "/2",
+    title: "2",
+    icon: <VideoCameraOutlined />,
+  },
+  {
+    path: "/3",
+    title: "3",
+    icon: <UploadOutlined />,
+  },
+];
 
 export default function Main() {
   const [collapsed, setCollapsed] = useState(false);
@@ -19,44 +54,43 @@ export default function Main() {
   };
 
   return (
-    <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo">KITS</div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            nav 1
-          </Menu.Item>
-          <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-            nav 2
-          </Menu.Item>
-          <Menu.Item key="3" icon={<UploadOutlined />}>
-            nav 3
-          </Menu.Item>
-        </Menu>
-      </Sider>
-      <Layout className="site-layout" style={{ minHeight: '100vh' }}>
-        <Header className="site-layout-background" style={{ padding: 0 }}>
-          {React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: 'trigger',
-              onClick: toggle,
-            }
-          )}
-        </Header>
-        <Content
-          className="site-layout-background"
-          style={{
-            margin: 24,
-            padding: 24,
-          }}
-        >
-          2342
-          {/* <Switch>
-              <Route  />
-          </Switch> */}
-        </Content>
+    <HashRouter>
+      <Layout>
+        <Sider trigger={null} collapsible collapsed={collapsed}>
+          <div className="logo">KITS</div>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={["0"]}>
+            {menuList.map((menu, index) => (
+              <Menu.Item key={index} icon={menu.icon}>
+                <Link to={menu.path}>{menu.title}</Link>
+              </Menu.Item>
+            ))}
+          </Menu>
+        </Sider>
+        <Layout className="site-layout" style={{ minHeight: "100vh" }}>
+          <Header className="site-layout-background" style={{ padding: 0 }}>
+            {React.createElement(
+              collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+              {
+                className: "trigger",
+                onClick: toggle,
+              }
+            )}
+          </Header>
+          <Content
+            className="site-layout-background"
+            style={{
+              margin: 24,
+              // padding: 24,
+            }}
+          >
+            <Switch>
+              {navList.map((nav, index) => (
+                <Route key={index} {...nav} />
+              ))}
+            </Switch>
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </HashRouter>
   );
 }
