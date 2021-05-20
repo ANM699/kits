@@ -24,9 +24,9 @@ function Rgl({
 
   const [layout, setLayout] = useState([]);
 
-  const onDrop = (layout, layoutItem, _event) => {
-    console.log(layout);
-    console.log(layoutItem);
+  const onDrop = (layout) => {
+    // console.log(layout);
+    // console.log(layoutItem);
     setLayout(layout);
   };
 
@@ -58,7 +58,7 @@ function Rgl({
       >
         {layout.map((item) => (
           <div key={item.i}>
-            <span className="text">{item.i}</span>
+            <span className="text">{item.i + "类型"}</span>
           </div>
         ))}
       </GridLayout>
