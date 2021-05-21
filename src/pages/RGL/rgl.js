@@ -1,36 +1,28 @@
 import React, { useState } from "react";
 import GridLayout from "react-grid-layout";
 import { withSize } from "react-sizeme";
+
 import "./rgl.less";
 
-function Rgl({
-  // items = [
-  //   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19, 18, 19, 20,
-  // ],
-  size,
-}) {
-  // const generateLayout = () => {
-  //   return items.map((item, i) => {
-  //     const y = Math.ceil(Math.random() * 4);
-  //     return {
-  //       x: i % 12,
-  //       y: Math.floor(i / 6) * y,
-  //       w: Math.round(Math.random() * 11 + 1),
-  //       h: y,
-  //       i: i.toString(),
-  //     };
-  //   });
-  // };
-
+function Rgl({ size }) {
   const [layout, setLayout] = useState([]);
+  const [droppingItem, setDroppingItem] = useState(null);
 
-  const onDrop = (layout) => {
-    // console.log(layout);
-    // console.log(layoutItem);
+  const onDrop = (newLayout, layoutItem, e) => {
+    console.log(newLayout);
+    console.log(layoutItem);
+    // console.log(e);
+    const type = e.dataTransfer.getData("dragData");
+    layoutItem.type = type;
+    layout.push(layoutItem);
     setLayout(layout);
   };
 
-  // const layout = generateLayout();
+  const onDragStart = (type, e) => {
+    e.dataTransfer.setData("dragData", type);
+    setDroppingItem({ i: Date.now().toString(), w: 4, h: 3 });
+  };
+
   const { width } = size;
   //默认margin=10
   const rowHeight = width / 12 - 10;
@@ -41,9 +33,21 @@ function Rgl({
         className="droppable-element"
         draggable={true}
         unselectable="on"
-        onDragStart={(e) => e.dataTransfer.setData("text/plain", "")}
+        onDragStart={(e) => {
+          onDragStart("轮播", e);
+        }}
       >
         拖拽组件
+      </div>
+      <div
+        className="droppable-element"
+        draggable={true}
+        unselectable="on"
+        onDragStart={(e) => {
+          onDragStart("图文", e);
+        }}
+      >
+        图文组件
       </div>
       <GridLayout
         style={{ minHeight }}
@@ -52,13 +56,13 @@ function Rgl({
         rowHeight={rowHeight}
         layout={layout}
         isDroppable={true}
-        droppingItem={{ i: layout.length.toString(), w: 3, h: 2 }}
+        droppingItem={droppingItem}
         isBounded
         onDrop={onDrop}
       >
         {layout.map((item) => (
           <div key={item.i}>
-            <span className="text">{item.i + "类型"}</span>
+            <span className="text">{item.type}</span>
           </div>
         ))}
       </GridLayout>
