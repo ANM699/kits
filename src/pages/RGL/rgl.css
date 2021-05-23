@@ -1,12 +1,9 @@
 .react-grid-layout {
   position: relative;
-  border-right: 1px solid rgb(29, 165, 122);
-  border-bottom: 1px solid rgb(29, 165, 122);
+  border-right: 1px solid #1da57a;
+  border-bottom: 1px solid #1da57a;
   transition: height 200ms ease;
-  background-image: linear-gradient(rgba(29, 165, 122, 0.2) 1px, transparent 0),
-    linear-gradient(90deg, rgba(29, 165, 122, 0.2) 1px, transparent 0),
-    linear-gradient(rgb(29, 165, 122) 1px, transparent 0),
-    linear-gradient(90deg, rgb(29, 165, 122) 1px, transparent 0);
+  background-image: linear-gradient(rgba(29, 165, 122, 0.2) 1px, transparent 0), linear-gradient(90deg, rgba(29, 165, 122, 0.2) 1px, transparent 0), linear-gradient(#1da57a 1px, transparent 0), linear-gradient(90deg, #1da57a 1px, transparent 0);
 }
 .react-grid-item {
   transition: all 200ms ease;
@@ -23,17 +20,14 @@
   z-index: 1;
   will-change: width, height;
 }
-
 .react-grid-item.react-draggable-dragging {
   transition: none;
   z-index: 3;
   will-change: transform;
 }
-
 .react-grid-item.dropping {
   visibility: hidden;
 }
-
 .react-grid-item.react-grid-placeholder {
   background: #1da57a;
   opacity: 0.2;
@@ -45,13 +39,11 @@
   -o-user-select: none;
   user-select: none;
 }
-
 .react-grid-item > .react-resizable-handle {
   position: absolute;
   width: 20px;
   height: 20px;
 }
-
 .react-grid-item > .react-resizable-handle::after {
   content: "";
   position: absolute;
@@ -62,11 +54,9 @@
   border-right: 2px solid rgba(0, 0, 0, 0.4);
   border-bottom: 2px solid rgba(0, 0, 0, 0.4);
 }
-
 .react-resizable-hide > .react-resizable-handle {
   display: none;
 }
-
 .react-grid-item > .react-resizable-handle.react-resizable-handle-sw {
   bottom: 0;
   left: 0;
@@ -118,7 +108,6 @@
   bottom: 0;
   transform: rotate(45deg);
 }
-
 .react-grid-item .text {
   background: #ccc;
   font-size: 24px;
@@ -129,10 +118,8 @@
   left: 0;
   right: 0;
   margin: 2px;
-  // height: 24px;
   border: 1px solid black;
 }
-
 .droppable-element {
   width: 150px;
   text-align: center;

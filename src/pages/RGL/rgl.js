@@ -9,24 +9,32 @@ function Rgl({ size }) {
   const [droppingItem, setDroppingItem] = useState(null);
 
   const onDrop = (newLayout, layoutItem, e) => {
-    console.log(newLayout);
-    console.log(layoutItem);
-    // console.log(e);
     const type = e.dataTransfer.getData("dragData");
     layoutItem.type = type;
-    layout.push(layoutItem);
-    setLayout(layout);
+    const _newLayout = newLayout.map((newItem) => {
+      const oldItem = layout.find((oldItem) => oldItem.i === newItem.i);
+      if (oldItem) newItem = Object.assign(oldItem, newItem);
+      return newItem;
+    });
+    setLayout(_newLayout);
   };
 
-  const onDragStart = (type, e) => {
+  const onDragStart = (type, dimension, e) => {
+    const { w, h } = dimension;
     e.dataTransfer.setData("dragData", type);
-    setDroppingItem({ i: Date.now().toString(), w: 4, h: 3 });
+    setDroppingItem({ i: Date.now().toString(), w, h });
   };
 
   const { width } = size;
   //默认margin=10
-  const rowHeight = width / 12 - 10;
-  const minHeight = width / 12 + 10;
+  const gridSize = width / 24;
+  const rowHeight = gridSize - 10;
+  const minHeight = gridSize + 10;
+  const backgroundSize = `${gridSize / 5}px ${gridSize / 5}px,${
+    gridSize / 5
+  }px ${
+    gridSize / 5
+  }px,${gridSize}px ${gridSize}px,${gridSize}px ${gridSize}px`;
   return (
     <div>
       <div
@@ -34,7 +42,7 @@ function Rgl({ size }) {
         draggable={true}
         unselectable="on"
         onDragStart={(e) => {
-          onDragStart("轮播", e);
+          onDragStart("轮播", { w: 12, h: 7 }, e);
         }}
       >
         拖拽组件
@@ -44,21 +52,26 @@ function Rgl({ size }) {
         draggable={true}
         unselectable="on"
         onDragStart={(e) => {
-          onDragStart("图文", e);
+          onDragStart("图文", { w: 3, h: 4 }, e);
         }}
       >
         图文组件
       </div>
       <GridLayout
-        style={{ minHeight }}
+        style={{
+          minHeight: gridSize * 10,
+          backgroundSize,
+        }}
         className="layout"
         width={width}
-        rowHeight={rowHeight}
+        rowHeight={gridSize}
         layout={layout}
         isDroppable={true}
         droppingItem={droppingItem}
         isBounded
         onDrop={onDrop}
+        cols={24}
+        margin={[0, 0]}
       >
         {layout.map((item) => (
           <div key={item.i}>
