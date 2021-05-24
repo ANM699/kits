@@ -18,7 +18,7 @@ export default function Toolbar({ setDroppingItem }) {
           onDragStart("轮播", { w: 12, h: 7 }, e);
         }}
       >
-        拖拽组件
+        轮播组件
       </div>
       <div
         className="droppable-element"
