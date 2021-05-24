@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import "./Main.less";
 
-import Rgl from "./RGL/rgl";
+import Rgl from "./rgl/rgl";
 
 const { Header, Sider, Content } = Layout;
 
