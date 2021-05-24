@@ -7,7 +7,7 @@ export default function Rgl() {
   const [droppingItem, setDroppingItem] = useState(null);
 
   return (
-    <Row>
+    <Row gutter={8}>
       <Col span={20}>
         <GridLayout droppingItem={droppingItem} />
       </Col>

@@ -29,7 +29,7 @@ function GridLayout({ size, droppingItem }) {
   return (
     <ReactGridLayout
       style={{
-        minHeight: gridSize * 10,
+        minHeight: gridSize * 15,
         backgroundSize,
       }}
       isBounded

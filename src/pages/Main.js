@@ -79,8 +79,8 @@ export default function Main() {
           <Content
             className="site-layout-background"
             style={{
-              margin: 24,
-              // padding: 24,
+              margin: 8,
+              padding: 8,
             }}
           >
             <Switch>
