@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactGridLayout from "react-grid-layout";
 import { withSize } from "react-sizeme";
+import Widget from "../widget/widget";
 
 import "./grid-layout.less";
 
@@ -16,8 +17,8 @@ function GridLayout({ size, droppingItem }) {
   }px,${gridSize}px ${gridSize}px,${gridSize}px ${gridSize}px`;
 
   const onDrop = (newLayout, layoutItem, e) => {
-    const type = e.dataTransfer.getData("dragData");
-    layoutItem.type = type;
+    const data = e.dataTransfer.getData("dragData");
+    layoutItem.data = data;
     const _newLayout = newLayout.map((newItem) => {
       const oldItem = layout.find((oldItem) => oldItem.i === newItem.i);
       if (oldItem) newItem = Object.assign(oldItem, newItem);
@@ -44,8 +45,8 @@ function GridLayout({ size, droppingItem }) {
       margin={[0, 0]}
     >
       {layout.map((item) => (
-        <div key={item.i}>
-          <span className="text">{item.type}</span>
+        <div style={{ padding: 2 }} key={item.i}>
+          <Widget data={item.data} />
         </div>
       ))}
     </ReactGridLayout>
