@@ -7,7 +7,6 @@ import "./grid-layout.less";
 
 function GridLayout({ size, droppingItem }) {
   const [layout, setLayout] = useState([]);
-
   const { width } = size;
   const gridSize = width / 24;
   const backgroundSize = `${gridSize / 5}px ${gridSize / 5}px,${
@@ -27,10 +26,24 @@ function GridLayout({ size, droppingItem }) {
     setLayout(_newLayout);
   };
 
+  const onResize = (newLayout, oldItem, newItem, placeholder, e, element) => {
+    // console.log(layout, oldItem, newItem, placeholder, e, element);
+    const _newLayout = layout.map((item) => {
+      if (item.i === newItem.i) return Object.assign(item, newItem);
+      return item;
+    });
+    setLayout(_newLayout);
+  };
+
+  const onRemove = (i) => {
+    const _newLayout = layout.filter((item) => item.i !== i);
+    setLayout(_newLayout);
+  };
+
   return (
     <ReactGridLayout
       style={{
-        minHeight: gridSize * 15,
+        minHeight: gridSize * 12,
         backgroundSize,
       }}
       isBounded
@@ -40,13 +53,14 @@ function GridLayout({ size, droppingItem }) {
       layout={layout}
       isDroppable={true}
       droppingItem={droppingItem}
+      onResize={onResize}
       onDrop={onDrop}
       cols={24}
       margin={[0, 0]}
     >
       {layout.map((item) => (
-        <div style={{ padding: 2 }} key={item.i}>
-          <Widget data={item.data} />
+        <div key={item.i}>
+          <Widget grid={item} gridSize={gridSize} onRemove={onRemove} />
         </div>
       ))}
     </ReactGridLayout>

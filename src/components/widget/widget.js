@@ -1,28 +1,32 @@
 import React, { forwardRef } from "react";
 import { Carousel, Image } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import "./widget.less";
 
-export default forwardRef(({ data }, ref) => {
+export default forwardRef(({ grid, gridSize, onRemove }, ref) => {
   const contentStyle = {
-    height: 300,
-    color: "#fff",
-    lineHeight: 300,
-    textAlign: "center",
-    background: "#364d79",
+    height: grid.h * gridSize - 6,
+    lineHeight: `${grid.h * gridSize - 6}px`,
   };
   let el = null;
-  switch (data) {
+  switch (grid.data) {
     case "carousel":
       el = (
         <Carousel autoplay>
           <div>
-            <h3 style={contentStyle}>1</h3>
+            <h3 className="content" style={contentStyle}>
+              1
+            </h3>
           </div>
           <div>
-            <h3 style={contentStyle}>2</h3>
+            <h3 className="content" style={contentStyle}>
+              2
+            </h3>
           </div>
           <div>
-            <h3 style={contentStyle}>3</h3>
+            <h3 className="content" style={contentStyle}>
+              3
+            </h3>
           </div>
         </Carousel>
       );
@@ -44,5 +48,19 @@ export default forwardRef(({ data }, ref) => {
     default:
       break;
   }
-  return el;
+  return (
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        padding: 4,
+      }}
+    >
+      {el}
+      <CloseCircleOutlined
+        className="remove"
+        onClick={() => onRemove(grid.i)}
+      />
+    </div>
+  );
 });

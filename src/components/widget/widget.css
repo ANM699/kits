@@ -8,10 +8,7 @@
   left: 0;
   right: 0;
   margin: 2px;
-  // height: 24px;
-  // border: 1px solid black;
 }
-
 .remove {
   position: absolute;
   right: 8px;
@@ -20,10 +17,8 @@
   color: rgba(0, 0, 0, 0.6);
   cursor: "pointer";
 }
-
 .content {
   text-align: center;
   color: #fff;
   background-color: #1da57a;
-  // opacity: 0.8;
 }
