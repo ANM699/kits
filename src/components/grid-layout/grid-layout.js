@@ -5,7 +5,7 @@ import Widget from "../widget/widget";
 
 import "./grid-layout.less";
 
-function GridLayout({ size, droppingItem }) {
+function GridLayout({ size, droppingItem, setGridSize }) {
   const [layout, setLayout] = useState([]);
   const { width } = size;
   const gridSize = width / 24;
@@ -39,6 +39,8 @@ function GridLayout({ size, droppingItem }) {
     const _newLayout = layout.filter((item) => item.i !== i);
     setLayout(_newLayout);
   };
+
+  setGridSize(gridSize);
 
   return (
     <ReactGridLayout

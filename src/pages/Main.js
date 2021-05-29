@@ -4,7 +4,7 @@ import { Switch, Route, HashRouter, Link } from "react-router-dom";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined,
+  BorderlessTableOutlined,
   VideoCameraOutlined,
   UploadOutlined,
   LayoutOutlined,
@@ -12,6 +12,7 @@ import {
 import "./Main.less";
 
 import Rgl from "./rgl/rgl";
+import Demo from "./demo/demo";
 
 const { Header, Sider, Content } = Layout;
 
@@ -19,6 +20,11 @@ const navList = [
   {
     path: "/",
     component: Rgl,
+    exact: true,
+  },
+  {
+    path: "/ruler",
+    component: Demo,
     exact: true,
   },
 ];
@@ -30,9 +36,9 @@ const menuList = [
     icon: <LayoutOutlined />,
   },
   {
-    path: "/1",
-    title: "1",
-    icon: <UserOutlined />,
+    path: "/ruler",
+    title: "Ruler",
+    icon: <BorderlessTableOutlined />,
   },
   {
     path: "/2",
