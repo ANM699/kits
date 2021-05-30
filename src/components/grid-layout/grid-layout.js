@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactGridLayout from "react-grid-layout";
 import { withSize } from "react-sizeme";
 import Widget from "../widget/widget";
 
 import "./grid-layout.less";
 
-function GridLayout({ size, droppingItem, setGridSize }) {
+function GridLayout({ size, droppingItem, setSize }) {
   const [layout, setLayout] = useState([]);
-  const { width } = size;
+  const { width, height } = size;
   const gridSize = width / 24;
   const backgroundSize = `${gridSize / 5}px ${gridSize / 5}px,${
     gridSize / 5
   }px ${
     gridSize / 5
   }px,${gridSize}px ${gridSize}px,${gridSize}px ${gridSize}px`;
+
+  useEffect(() => {
+    setSize({ width, height });
+  }, [width, height, setSize]);
 
   const onDrop = (newLayout, layoutItem, e) => {
     const data = e.dataTransfer.getData("dragData");
@@ -39,8 +43,6 @@ function GridLayout({ size, droppingItem, setGridSize }) {
     const _newLayout = layout.filter((item) => item.i !== i);
     setLayout(_newLayout);
   };
-
-  setGridSize(gridSize);
 
   return (
     <ReactGridLayout
@@ -68,4 +70,4 @@ function GridLayout({ size, droppingItem, setGridSize }) {
     </ReactGridLayout>
   );
 }
-export default withSize()(GridLayout);
+export default withSize({ monitorHeight: true })(GridLayout);

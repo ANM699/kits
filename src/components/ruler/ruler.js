@@ -2,8 +2,11 @@ import React from "react";
 import "./ruler.less";
 
 export default function Ruler({ children, size }) {
+  const { width, height } = size;
+  const gridSize = width / 24;
+  const count_v = Math.round(height / gridSize) || 0;
   const rulerStyle = {
-    backgroundSize: `${size}px 30px`,
+    backgroundSize: `${gridSize}px 30px`,
   };
   return (
     <>
@@ -12,7 +15,7 @@ export default function Ruler({ children, size }) {
           <ul className="scale">
             {Array.from(Array(24), (e, i) => {
               return (
-                <li style={{ width: `${size}px` }} key={i}>
+                <li style={{ width: `${gridSize}px` }} key={i}>
                   {i + 1}
                 </li>
               );
@@ -21,13 +24,17 @@ export default function Ruler({ children, size }) {
         </div>
         <div
           className="ruler v"
-          style={{ ...rulerStyle, width: `${size * 12}px` }}
+          style={{
+            ...rulerStyle,
+            minWidth: `${gridSize * 12}px`,
+            width: `${height}px`,
+          }}
         >
           <ul className="scale">
-            {Array.from(Array(12), (e, i) => {
+            {Array.from(Array(count_v), (e, i) => {
               return (
-                <li style={{ width: `${size}px` }} key={i}>
-                  {12 - i}
+                <li style={{ width: `${gridSize}px` }} key={i}>
+                  {count_v - i}
                 </li>
               );
             })}

@@ -6,13 +6,13 @@ import Ruler from "@components/ruler/ruler";
 
 export default function Rgl() {
   const [droppingItem, setDroppingItem] = useState(null);
-  const [gridSize, setGridSize] = useState(null);
+  const [size, setSize] = useState({ width: 0, height: 0 });
   return (
     <>
       <ToolBar setDroppingItem={setDroppingItem} />
       <Divider style={{ marginTop: 0, marginBottom: 15 }} />
-      <Ruler size={gridSize}>
-        <GridLayout setGridSize={setGridSize} droppingItem={droppingItem} />
+      <Ruler size={size}>
+        <GridLayout setSize={setSize} droppingItem={droppingItem} />
       </Ruler>
     </>
   );
