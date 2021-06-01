@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 import { Carousel, Image } from "antd";
-import { CloseCircleOutlined } from "@ant-design/icons";
+
 import "./widget.less";
 
-export default forwardRef(({ grid, gridSize, onRemove }, ref) => {
+export default forwardRef(({ grid, gridSize }, ref) => {
   const contentStyle = {
     height: grid.h * gridSize - 6,
     lineHeight: `${grid.h * gridSize - 6}px`,
@@ -57,10 +57,6 @@ export default forwardRef(({ grid, gridSize, onRemove }, ref) => {
       }}
     >
       {el}
-      <CloseCircleOutlined
-        className="remove"
-        onClick={() => onRemove(grid.i)}
-      />
     </div>
   );
 });

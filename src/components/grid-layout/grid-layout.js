@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactGridLayout from "react-grid-layout";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import { withSize } from "react-sizeme";
 import Widget from "../widget/widget";
 
@@ -64,7 +65,13 @@ function GridLayout({ size, droppingItem, setSize }) {
     >
       {layout.map((item) => (
         <div key={item.i}>
-          <Widget grid={item} gridSize={gridSize} onRemove={onRemove} />
+          <Widget grid={item} gridSize={gridSize} />
+          <CloseCircleOutlined
+            className="remove"
+            onClick={(e) => {
+              onRemove(item.i);
+            }}
+          />
         </div>
       ))}
     </ReactGridLayout>
