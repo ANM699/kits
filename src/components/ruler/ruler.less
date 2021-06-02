@@ -37,7 +37,7 @@
   transform-origin: 0 0;
   height: 30px;
   background-position: 0 100%;
-  transform: rotate(-90deg) translateX(-100%);
+  transform: rotate(90deg) rotateX(180deg);
 }
 
 .ruler.h {
@@ -73,6 +73,8 @@
 
 .ruler.v .scale li {
   text-align: left;
+  padding-left: 2px;
+  transform: rotateY(180deg);
 }
 
 .container {

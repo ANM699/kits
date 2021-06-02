@@ -3,7 +3,7 @@ import ReactGridLayout from "react-grid-layout";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import { withSize } from "react-sizeme";
 import Widget from "../widget/widget";
-
+import withRuler from "@components/ruler/withRuler";
 import "./grid-layout.less";
 
 function GridLayout({ size, droppingItem, setSize }) {
@@ -77,4 +77,5 @@ function GridLayout({ size, droppingItem, setSize }) {
     </ReactGridLayout>
   );
 }
-export default withSize({ monitorHeight: true })(GridLayout);
+
+export default withRuler(withSize({ monitorHeight: true })(GridLayout));
