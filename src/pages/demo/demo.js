@@ -1,4 +1,7 @@
 import React from "react";
-export default function Demo() {
+import withRuler from "@components/ruler/withRuler";
+function Demo() {
   return <div>test</div>;
 }
+
+export default withRuler(Demo);

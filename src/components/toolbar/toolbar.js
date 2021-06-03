@@ -18,7 +18,7 @@ export default function Toolbar({ setDroppingItem }) {
             draggable={true}
             unselectable="on"
             onDragStart={(e) => {
-              onDragStart("carousel", { w: 12, h: 7 }, e);
+              onDragStart("carousel", { w: 9, h: 5 }, e);
             }}
           ></div>
         </Tooltip>

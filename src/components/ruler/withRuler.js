@@ -11,7 +11,7 @@ export default function withRuler(WrappedComponent) {
     };
 
     return (
-      <div className="container" style={{ height: `${height + 30}px` }}>
+      <div className="container">
         <div className="ruler h" style={rulerStyle}>
           <ul className="scale">
             {Array.from(Array(24), (e, i) => {
