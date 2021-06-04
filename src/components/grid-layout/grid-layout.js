@@ -6,7 +6,7 @@ import Widget from "../widget/widget";
 import withRuler from "@components/ruler/withRuler";
 import "./grid-layout.less";
 
-function GridLayout({ size, droppingItem, setSize }) {
+function GridLayout({ size, droppingItem, onItemClick, setSize }) {
   const [layout, setLayout] = useState([]);
   const { width, height } = size;
   const gridSize = width / 24;
@@ -46,35 +46,38 @@ function GridLayout({ size, droppingItem, setSize }) {
   };
 
   return (
-    <ReactGridLayout
-      style={{
-        minHeight: gridSize * 12,
-        backgroundSize,
-      }}
-      isBounded
-      className="layout"
-      width={width}
-      rowHeight={gridSize}
-      layout={layout}
-      isDroppable={true}
-      droppingItem={droppingItem}
-      onResize={onResize}
-      onDrop={onDrop}
-      cols={24}
-      margin={[0, 0]}
-    >
-      {layout.map((item) => (
-        <div key={item.i}>
-          <Widget grid={item} gridSize={gridSize} />
-          <CloseCircleOutlined
-            className="remove"
-            onClick={(e) => {
-              onRemove(item.i);
-            }}
-          />
-        </div>
-      ))}
-    </ReactGridLayout>
+    <>
+      <ReactGridLayout
+        style={{
+          minHeight: gridSize * 12,
+          backgroundSize,
+        }}
+        isBounded
+        className="layout"
+        width={width}
+        rowHeight={gridSize}
+        layout={layout}
+        isDroppable={true}
+        droppingItem={droppingItem}
+        onResize={onResize}
+        onDrop={onDrop}
+        cols={24}
+        margin={[0, 0]}
+      >
+        {layout.map((item) => (
+          <div key={item.i}>
+            <Widget grid={item} gridSize={gridSize} onClick={onItemClick} />
+            <CloseCircleOutlined
+              className="remove"
+              onClick={(e) => {
+                e.preventDefault();
+                onRemove(item.i);
+              }}
+            />
+          </div>
+        ))}
+      </ReactGridLayout>
+    </>
   );
 }
 

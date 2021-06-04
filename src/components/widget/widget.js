@@ -3,11 +3,16 @@ import { Carousel, Image } from "antd";
 
 import "./widget.less";
 
-export default forwardRef(({ grid, gridSize }, ref) => {
+export default forwardRef(({ grid, gridSize, onClick }, ref) => {
   const contentStyle = {
     height: grid.h * gridSize - 6,
     lineHeight: `${grid.h * gridSize - 6}px`,
   };
+
+  const handleClick = () => {
+    onClick(grid);
+  };
+
   let el = null;
   switch (grid.data) {
     case "carousel":
@@ -43,7 +48,11 @@ export default forwardRef(({ grid, gridSize }, ref) => {
       );
       break;
     case "custom":
-      el = <span className="custom">自定义</span>;
+      el = (
+        <span ref={ref} className="custom">
+          自定义
+        </span>
+      );
       break;
     default:
       break;
@@ -55,6 +64,7 @@ export default forwardRef(({ grid, gridSize }, ref) => {
         width: "100%",
         padding: 4,
       }}
+      onClick={handleClick}
     >
       {el}
     </div>
