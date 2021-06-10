@@ -34,7 +34,7 @@ export default class PicturesWall extends Component {
   };
   render() {
     const { previewVisible, previewImage, previewTitle } = this.state;
-    const { defaultFileList, onChange } = this.props;
+    const { fileList, onChange } = this.props;
     const UploadButton = (
       <div>
         <PlusOutlined />
@@ -46,8 +46,7 @@ export default class PicturesWall extends Component {
         <Upload
           action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           listType="picture-card"
-          defaultFileList={defaultFileList}
-          //   fileList={fileList}
+          fileList={fileList}
           onPreview={this.handlePreview}
           onChange={onChange}
         >

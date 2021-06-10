@@ -9,7 +9,7 @@ export default forwardRef(({ grid, gridSize }, ref) => {
     lineHeight: `${grid.h * gridSize - 6}px`,
   };
   let el = null;
-  switch (grid.data.type) {
+  switch (grid.type) {
     case "carousel":
       el = (
         <Carousel autoplay>
@@ -33,8 +33,8 @@ export default forwardRef(({ grid, gridSize }, ref) => {
       break;
     case "image":
       const src =
-        grid.data.fileList && grid.data.fileList.length
-          ? grid.data.fileList[0].thumbUrl
+        grid.fileList && grid.fileList.length
+          ? grid.fileList[0].thumbUrl
           : "error";
       el = (
         <Image

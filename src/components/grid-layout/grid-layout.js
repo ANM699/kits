@@ -26,7 +26,8 @@ function GridLayout({ size, droppingItem, setRuler }) {
   }, [width, height, setRuler]);
 
   const showDrawer = (item) => {
-    setCurItem({ ...item });
+    console.log(item);
+    setCurItem(item);
     setVisible(true);
   };
 
@@ -45,7 +46,7 @@ function GridLayout({ size, droppingItem, setRuler }) {
 
   const onDrop = (newLayout, layoutItem, e) => {
     const data = JSON.parse(e.dataTransfer.getData("dragData"));
-    layoutItem.data = data;
+    layoutItem = Object.assign(layoutItem, data);
     const _newLayout = newLayout.map((newItem) => {
       const oldItem = layout.find((oldItem) => oldItem.i === newItem.i);
       if (oldItem) newItem = Object.assign(oldItem, newItem);
@@ -68,12 +69,7 @@ function GridLayout({ size, droppingItem, setRuler }) {
   };
 
   const handleChange = ({ fileList }) => {
-    curItem.data.fileList = fileList;
-    // console.log(curItem);
-    // console.log(layout);
-    setCurItem({ ...curItem });
-    // setLayout(layout);
-    console.log(fileList);
+    setCurItem({ ...curItem, fileList });
   };
 
   return (
@@ -109,7 +105,7 @@ function GridLayout({ size, droppingItem, setRuler }) {
         ))}
       </ReactGridLayout>
       <Drawer
-        title={curItem ? curItem.data.type : ""}
+        title={curItem ? curItem.type : ""}
         width={384}
         bodyStyle={{ paddingBottom: 80 }}
         placement="right"
@@ -132,7 +128,7 @@ function GridLayout({ size, droppingItem, setRuler }) {
         }
       >
         <PicturesWall
-          defaultFileList={curItem ? curItem.data.fileList : []}
+          fileList={curItem ? curItem.fileList : []}
           onChange={handleChange}
         />
       </Drawer>
