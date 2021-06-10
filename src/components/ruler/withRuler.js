@@ -42,7 +42,7 @@ export default function withRuler(WrappedComponent) {
           </ul>
         </div>
         <div className="children">
-          <WrappedComponent setSize={setSize} {...props} />
+          <WrappedComponent setRuler={setSize} {...props} />
         </div>
       </div>
     );
