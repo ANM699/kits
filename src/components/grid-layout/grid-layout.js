@@ -22,11 +22,10 @@ function GridLayout({ size, droppingItem, setRuler }) {
   }px,${gridSize}px ${gridSize}px,${gridSize}px ${gridSize}px`;
 
   useEffect(() => {
-    setRuler({ width, height });
+    setRuler({ width, height, divide: 24 });
   }, [width, height, setRuler]);
 
   const showDrawer = (item) => {
-    console.log(item);
     setCurItem(item);
     setVisible(true);
   };

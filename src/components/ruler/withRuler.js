@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./ruler.less";
 export default function withRuler(WrappedComponent) {
   return function (props) {
-    const [size, setSize] = useState({ width: 0, height: 0 });
-    const { width, height } = size;
-    const gridSize = width / 24;
+    const [size, setSize] = useState({ width: 0, height: 0, divide: 24 });
+    const { width, height, divide } = size;
+    const gridSize = width / divide;
     const count_v = Math.round(height / gridSize) || 0;
     const rulerStyle = {
       backgroundSize: `${gridSize}px 30px`,
@@ -12,9 +12,12 @@ export default function withRuler(WrappedComponent) {
 
     return (
       <div className="container">
-        <div className="ruler h" style={rulerStyle}>
+        <div
+          className="ruler h"
+          style={{ ...rulerStyle, width: `${width + 30}px` }}
+        >
           <ul className="scale">
-            {Array.from(Array(24), (e, i) => {
+            {Array.from(Array(divide), (e, i) => {
               return (
                 <li style={{ width: `${gridSize}px` }} key={i}>
                   {i + 1}

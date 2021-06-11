@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import withRuler from "@components/ruler/withRuler";
-function Demo() {
+function Demo({ setRuler }) {
+  useEffect(() => {
+    setRuler({ width: 100, height: 80, divide: 10 });
+  }, [setRuler]);
   return <div>test</div>;
 }
 
