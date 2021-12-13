@@ -3,6 +3,8 @@ import { Divider } from "antd";
 import ToolBar from "@components/toolbar/toolbar";
 import GridLayout from "@components/grid-layout/grid-layout";
 
+import "./rgl.less";
+
 export default function Rgl() {
   const [droppingItem, setDroppingItem] = useState(null);
 

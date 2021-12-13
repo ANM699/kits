@@ -15,11 +15,9 @@ function GridLayout({ size, droppingItem, setRuler }) {
 
   const { width, height } = size;
   const gridSize = width / 24;
-  const backgroundSize = `${gridSize / 5}px ${gridSize / 5}px,${
-    gridSize / 5
-  }px ${
-    gridSize / 5
-  }px,${gridSize}px ${gridSize}px,${gridSize}px ${gridSize}px`;
+  const backgroundSize = `${gridSize / 5}px ${gridSize / 5}px,${gridSize / 5
+    }px ${gridSize / 5
+    }px,${gridSize}px ${gridSize}px,${gridSize}px ${gridSize}px`;
 
   useEffect(() => {
     setRuler({ width, height, divide: 24 });
@@ -75,7 +73,7 @@ function GridLayout({ size, droppingItem, setRuler }) {
     <>
       <ReactGridLayout
         style={{
-          minHeight: gridSize * 12,
+          minHeight: gridSize * 24,
           backgroundSize,
         }}
         isBounded
@@ -91,7 +89,7 @@ function GridLayout({ size, droppingItem, setRuler }) {
         margin={[0, 0]}
       >
         {layout.map((item) => (
-          <div key={item.i} onClick={() => showDrawer(item)}>
+          <div key={item.i} onDoubleClick={() => showDrawer(item)}>
             <Widget grid={item} gridSize={gridSize} />
             <CloseCircleOutlined
               className="remove"
